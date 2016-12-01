@@ -47,13 +47,13 @@ void BTree<T>::removeBelow(const T &key, Node *&t)
     int test;
     if (t == NULL) return;
     if (t->data > key) removeBelow(key, t->left);
-    else if (t->data == key) {
-        if (t->left != NULL)
-            makeEmpty(t->left);
-    } else {
+    else {
         Node *tmp = t;
-        if (t->left != NULL)
+        if (t->left != NULL) {
             makeEmpty(t->left);
+            t->left = NULL;
+        }
+        if (t->data == key) return;
         t = t->right;
         delete tmp;
         removeBelow(key, t);
