@@ -46,7 +46,9 @@ void BTree<T>::removeBelow(const T &key, Node *&t)
 {
     if (t == NULL) return;
     if (t->data > key) removeBelow(key, t->left);
-    else {
+    else if (t->data == key) {
+        makeEmpty(t->left);
+    } else {
         Node *tmp = t;
         makeEmpty(t->left);
         t = t->right;
@@ -135,7 +137,7 @@ int main()
     for (int i = 0; i < 10; i++) {
         hmx.insert(a[i]);
     }
-    hmx.removeBelow(17);
+    hmx.removeBelow(12);
     
     hmx.inOrder();
 }
