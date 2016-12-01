@@ -44,13 +44,16 @@ class BTree
 template <class T>
 void BTree<T>::removeBelow(const T &key, Node *&t)
 {
+    int test;
     if (t == NULL) return;
     if (t->data > key) removeBelow(key, t->left);
     else if (t->data == key) {
-        makeEmpty(t->left);
+        if (t->left != NULL)
+            makeEmpty(t->left);
     } else {
         Node *tmp = t;
-        makeEmpty(t->left);
+        if (t->left != NULL)
+            makeEmpty(t->left);
         t = t->right;
         delete tmp;
         removeBelow(key, t);
@@ -124,20 +127,20 @@ void BTree<T>::makeEmpty()
 template <class T>
 void BTree<T>::makeEmpty(Node *&t)
 {
-  if (t->left != NULL) makeEmpty(t->left);
-  if (t->right != NULL) makeEmpty(t->right);
-  delete t;
+    if (t->left != NULL) makeEmpty(t->left);
+    if (t->right != NULL) makeEmpty(t->right);
+    delete t;
 }
 
 int main()
 {
     BTree<int> hmx;
 
-    int a[10]={4,7,12,0,19,8,1,30,5,6};
+    int a[10]={4,7,2,0,9,8,1,3,5,6};
     for (int i = 0; i < 10; i++) {
         hmx.insert(a[i]);
     }
-    hmx.removeBelow(12);
+    hmx.removeBelow(5);
     
     hmx.inOrder();
 }
