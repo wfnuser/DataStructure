@@ -1,2 +1,2 @@
 # DataStructure
-Suddenly found data structure in short is the same as dream snow in short.
+Suddenly found that data structure in short is the same as dream snow in short.
